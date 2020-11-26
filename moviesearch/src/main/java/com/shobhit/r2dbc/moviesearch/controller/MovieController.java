@@ -3,6 +3,8 @@ package com.shobhit.r2dbc.moviesearch.controller;
 import com.shobhit.r2dbc.moviesearch.model.Movie;
 import com.shobhit.r2dbc.moviesearch.service.MovieService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +23,24 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/movies")
 public class MovieController {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
+
   @Autowired
   private MovieService movieService;
 
   @PostMapping("/create")
   public Mono<Movie> createMovie(@RequestBody Movie movie) {
 
+    LOGGER.info("Creating Movie with name ", movie.getName());
+
     return movieService.createMovie(movie);
   }
 
   @GetMapping("{id}")
+
   public Mono<Movie> findMovieById(@PathVariable String id) {
+
+    LOGGER.info("Getting Movie with id ", id);
 
     return movieService.findById(id);
 
