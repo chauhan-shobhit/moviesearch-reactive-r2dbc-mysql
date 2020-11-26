@@ -4,10 +4,12 @@ import com.shobhit.r2dbc.moviesearch.model.Movie;
 import com.shobhit.r2dbc.moviesearch.repository.MovieRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class MovieService {
 
   @Autowired

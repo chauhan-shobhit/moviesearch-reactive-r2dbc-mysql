@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 
-  @ExceptionHandler({ BookAlreadyExistException.class })
+  @ExceptionHandler({ MovieAlreadyExistException.class })
   public ResponseEntity<CustomErrorResponse> handleProductAlreadyExistException(Throwable e) {
-    CustomErrorResponse response = new CustomErrorResponse("100", "Book Already Exists");
+    CustomErrorResponse response = new CustomErrorResponse("100", "Movie Already Exists");
     return new ResponseEntity<>(response, HttpStatus.CONFLICT);
   }
 
-  @ExceptionHandler({ BookNotFoundException.class })
+  @ExceptionHandler({ MovieNotFoundException.class })
   public ResponseEntity<CustomErrorResponse> handleProductNotFoundException(Throwable e) {
     CustomErrorResponse response = new CustomErrorResponse("404", "Book Not Found");
     return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

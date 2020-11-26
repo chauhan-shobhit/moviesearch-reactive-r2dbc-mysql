@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
@@ -30,19 +31,26 @@ public class MovieController {
   }
 
   @GetMapping("{id}")
-  public Mono<Movie> findById(@PathVariable String id) {
+  public Mono<Movie> findMovieById(@PathVariable String id) {
 
     return movieService.findById(id);
 
   }
 
   @GetMapping("/getAll")
-  public Flux<Movie> findAll() {
+  public Flux<Movie> findAllMovies() {
 
     return movieService.findAll();
   }
 
-  @PutMapping("/id")
+  @GetMapping
+  public Flux<Movie> findMoviesByDirectorAndYear(@RequestParam(value = "director") String director,
+      @RequestParam(value = "year") int year) {
+
+    return movieService.findByDirectorAndYear(director, year);
+  }
+
+  @PutMapping("/{id}")
   public Mono<Movie> updateMovie(@PathVariable String id, @RequestBody Movie movie) {
 
     return movieService.updateMovie(id, movie);
